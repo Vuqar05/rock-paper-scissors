@@ -1,5 +1,3 @@
-console.log("Hello World!")
-
 function getComputerChoice() {
     let randNum = Math.random()
     if (randNum < .33) return "rock"
@@ -7,4 +5,7 @@ function getComputerChoice() {
     else return "scissors"
 }
 
-console.log(getComputerChoice())
+
+function getHumanChoice() {
+    return prompt("Choose rock, paper or scissors")
+}
