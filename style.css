@@ -35,7 +35,9 @@ body {
 }
 
 .button-container button {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     flex-shrink: 1;
     background-color: blanchedalmond;
     border-radius: 10px;
