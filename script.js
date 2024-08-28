@@ -1,6 +1,14 @@
 let humanScore = 0;
 let computerScore = 0;
+let roundCount = 0;
 
+// add event listeners to buttons
+buttons = document.querySelectorAll("div.button-container button")
+
+for (const button of buttons) {
+    button.addEventListener("click", removeWinnerIndicator)
+    button.addEventListener("click", playRound)
+}
 
 function getComputerChoice() {
     let randNum = Math.random()
@@ -10,16 +18,22 @@ function getComputerChoice() {
 }
 
 
-function getHumanChoice() {
-    return prompt("Choose rock, paper or scissors")
+function removeWinnerIndicator() {
+    let winnerIndicator = document.querySelector("span.winner-indicator")
+    winnerIndicator?.remove()
 }
 
-function playRound(humanChoice, computerChoice) {
-    humanChoice = humanChoice.toLowerCase()
+
+function playRound(event) {
+    let resultsContainer = document.querySelector("div.results-container")
+    let result = document.createElement("div")
+
+    let humanChoice = event.target.getAttribute("id")
+    let computerChoice = getComputerChoice()
 
     // Do nothing if equal
     if (humanChoice === computerChoice) {
-        console.log("Draw")
+        result.innerText = "Draw"
     }
 
     // Human win scenarios
@@ -27,24 +41,26 @@ function playRound(humanChoice, computerChoice) {
              (humanChoice === 'scissors' && computerChoice === 'paper') ||
              (humanChoice === 'paper' && computerChoice === 'rock')){
         humanScore++
-        console.log(`You win because ${humanChoice} beats ${computerChoice}`)
+        result.innerText = `You win because ${humanChoice} beats ${computerChoice}`
     }
     // Computer wins
     else {
         computerScore ++
-        console.log(`You loose because ${computerChoice} beats ${humanChoice}`)
-    }
-}
-
-
-function playGame() {
-    for (let i = 0; i < 5; i++) {
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
-        playRound(humanSelection, computerSelection);
+        result.innerText = `You loose because ${computerChoice} beats ${humanChoice}`
     }
 
-    console.log("You ".concat(humanScore > computerScore ? "Win!" : "Loose :(") )
-}
+    resultsContainer.appendChild(result)
+    roundCount ++
 
-playGame()
+    if (roundCount === 5) {
+        let winnerAnnouncement = document.createElement("span")
+        winnerAnnouncement.classList.add("winner-indicator")
+        winnerAnnouncement.innerText = humanScore > computerScore ?  "Congrats, you won!" : "Sorry, but you lost :("
+
+        document.querySelector("div#content").insertBefore(
+            winnerAnnouncement, document.querySelector("div.button-container"))
+        roundCount = humanScore = computerScore = 0
+        resultsContainer.innerHTML = ''
+    }
+
+}
