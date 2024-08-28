@@ -1,6 +1,6 @@
 * {
     font-family: "Berlin Sans FB", sans-serif;
-
+    font-size: 5vw;
 }
 
 html, body {
@@ -19,7 +19,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 10px;
+    gap: 1vh;
     background-color: #faa500;
     border: #faa500 20px solid;
     border-radius: 10px;
@@ -27,17 +27,18 @@ body {
 
 .button-container {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: center;
-    gap: 5px
+    gap: 1vw
 }
 
 .button-container button {
+    flex-shrink: 1;
     background-color: blanchedalmond;
     border-radius: 10px;
-    width: 100px;
-    height: 100px;
-    font-size: 30px;
+    width: min(25vw, 250px);
+    height: min(25vw, 250px);
+    font-size: 10vw;
     box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 3px 10px 0 rgba(0,0,0,0.19);
 }
 
